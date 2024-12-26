@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Landing Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background-color: #dcc30b;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: chocolate;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .product-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .product-info img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-details h2 {
+            margin: 0 0 10px;
+            color: #dcc30b;
+            font-size: 2rem;
+        }
+
+        .product-details p {
+            margin: 0 0 15px;
+        }
+
+        .cta {
+            margin-top: 20px;
+        }
+
+        .cta button {
+            color: #dcc30b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cta button:hover {
+            color: #dcc30b;
+        }
+
+        .news-section {
+            margin-top: 40px;
+        }
+
+        .news-section h2 {
+            color: #dcc30b;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .news-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .news-section li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px 0;
+            background: #f1f1f1;
+            color: #333;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const newsSection = document.querySelector('.news-list');
+
+            try {
+                const response = await fetch('/api/news');
+                const news = await response.json();
+
+                news.forEach(item => {
+                    const newsItem = document.createElement('li');
+                    newsItem.textContent = item.title;
+                    newsSection.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error('Error fetching news:', error);
+                const errorMessage = document.createElement('li');
+                errorMessage.textContent = 'Failed to load news. Please try again later.';
+                newsSection.appendChild(errorMessage);
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Flash Studio</h1>
+    </header>
+
+    <div class="container">
+        <section class="product-info">
+            <div>
+                <img src="image.png" alt="Product Image">
+            </div>
+            <div class="product-details">
+                <h2>Advertising services</h2>
+                <p>Discover the amazing features of our latest product! With state-of-the-art technology and a sleek design, it is perfect for anyone looking to enhance their lifestyle.</p>
+                <p>Key Benefits:
+                    <ul>
+                        <li>High-quality materials</li>
+                        <li>Affordable price</li>
+                        <li>Easy to use</li>
+                    </ul>
+                </p>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <h2>Latest News</h2>
+            <ul class="news-list">
+                <!-- News items will be dynamically added here -->
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Flash Studio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
